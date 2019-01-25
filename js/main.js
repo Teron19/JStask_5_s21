@@ -42,9 +42,9 @@
     }
 
     function transformUrl(urlImg) {
-        return (urlImg.substr(0, 6)) == 'http://' ?
-            urlImg :
-            `http://${urlImg}`;
+        return (urlImg.substr(0, 6)) == 'http://' 
+        ? urlImg 
+        : `http://${urlImg}`;
         /*return urlImg.startsWith('http://' 
         ? urlImg;
         : 'http://' + urlImg;
