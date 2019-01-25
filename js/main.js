@@ -6,7 +6,7 @@ let btn = document.getElementById("play"),
     thirdBlock = document.querySelector('#third-line');
 
 let copyDate; // для создания копии
-let newDate[]; //для испольвозания метода forEach чтоб записать сюда изменённые значения
+let newDate = []; //для испольвозания метода forEach чтоб записать сюда изменённые значения
 let typeSelector,
     lineSelector;
 
