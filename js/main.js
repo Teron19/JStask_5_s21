@@ -1,15 +1,29 @@
 (function () {
-
+    'use strict'
     let btn = document.getElementById("play"),
         firstBlock = document.querySelector('#first-line'),
         secondBlock = document.querySelector('#second-line'),
         thirdBlock = document.querySelector('#third-line');
 
+        /*firstGroup =  document.querySelector('.first-group').classList.add("hide");
+        secondGroup = document.querySelector('.second-group').classList.add("hide");
+        document.querySelector('.third-group').classList.add("hide");*/
+
+        let firstGroup,
+            secondGroup,
+            thirdGroup;
+
+        let el = document.querySelector('#el');
+            el.classList.add('hide');
+        let el2 = document.querySelector('#el2');
+            el2.classList.add('hide');
+        let el3 = document.querySelector('#el3');
+            el3.classList.add('hide');
+
     let copyDate; // для создания копии
     let newDate = []; //для испольвозания метода forEach чтоб записать сюда изменённые значения
-    let typeSelector,
-        resultHTML,
-        lineSelector;
+    let typeMethod,
+        amountImage;
 
 
     copyDate = data.slice();
@@ -51,7 +65,7 @@
         return moment(elemDateMillisec).format('YYYY/MM/DD/ HH:mm');
     }
 
-
+    //---------------StartCode-------------
     function selectBox() {
         typeMethod = document.getElementById("type-selector").value; //выбранний метод
         amountImage = document.getElementById("line-selector").value; //количество картинок
@@ -72,86 +86,108 @@
         switch (typeMethod) {
             case '1':
                 getGalleryByReplace();
+                firstGroup =  document.querySelector('.first-group').classList.add("show");
+                // firstGroup = document.querySelector('#el');
+                //  el.classList.add('show');
                 break;
             case '2':
                 getGalleryByString();
+                secondGroup = document.querySelector('.second-group').classList.add("show");
+                // firstGroup = document.querySelector('#el2');
+                // el2.classList.add('show');
                 break;
             case '3':
-                galleryCreateElement();
+                galleryByCreateElement();
+                 thirdGroup = document.querySelector('.third-group').classList.add("hide")
+                // thirdGroup = document.querySelector('#el3');
+                //  el3.classList.add('show');
                 break;
         }
     }
 
     function getGalleryByReplace() {
+        let resultHTML = ''; // для накопления результата 
         const replaceItemTemplate = '<div class="col-sm-3 col-xs-6">\
     <img src="$url" alt="$name" class="img-thumbnail">\
     <div class="info-wrapper">\
-    <div class="text-muted">$name</div>\
-    <div class="text-muted top-padding">$description</div>\
-    <div class="text-muted">$date</div>\
+        <div class="text-muted">$name</div>\
+        <div class="text-muted top-padding">$description</div>\
+        <div class="text-muted">$date</div>\
     </div>\
     </div>';
         newDate.forEach(item => {
-            resultHTML += replaceItemTemplate
+            resultHTML += replaceItemTemplate // += прошлись по масиву даннх и записали результат в resultHTML и так каждій раз. В resultHTML накапливаем результт
                 .replace(/\$name/gi, item.name)
                 .replace("$url", item.url)
                 .replace("$description", item.description)
                 .replace("$date", item.date);
         })
-
-        firstBlock.innerHTML = resultHTML;
+        firstBlock.innerHTML = resultHTML; //вывод результата
     }
 
     function getGalleryByString() {
-        // пример построения галлереи с помощю шаблонных строк
-        let secondItemTemplate = `<div class="col-sm-3 col-xs-6">\
-               <img src="${item.url}" alt="${item.name}" class="img-thumbnail">\
-               <div class="info-wrapper">\
-                   <div class="text-muted">${item.name}</div>\
-                   <div class="text-muted top-padding">${item.description}</div>\
-                   <div class="text-muted">${item.date}</div>\
-               </div>\
+        // пример построения галлереи с помощю шаблонных строк.
+        let secondItemTemplate = ''; // создаем для накапливания результата. 
+        newDate.forEach(item => { // проходимся методом forEach до конца массива обектов newDate и на каждой итерации добавляем результат в переменную secondItemTemplate.
+            secondItemTemplate += `<div class="col-sm-3 col-xs-6">
+               <img src="${item.url}" alt="${item.name}" class="img-thumbnail">
+               <div class="info-wrapper">
+                   <div class="text-muted">${item.name}</div>
+                   <div class="text-muted top-padding">${item.description}</div>
+                   <div class="text-muted">${item.date}</div>
+               </div>
                </div>`;
-        //secondBlock.innerHTML = secondItemTemplate;
+        })
+        secondBlock.innerHTML = secondItemTemplate; //выводим ныкопленные с secondItemTemplate данные в secondBlock = document.querySelector('#second-line'),
     }
 
-    function getGalleryCreateElement() {
+    function galleryByCreateElement() {
+        //const element = document.querySelector('#third-line');
+        let resultElement = newDate.forEach(item => {
+            let = divCol = document.createElement('div');
+                img = document.createElement('img');
+                img.classlist.add('img-thumbnail')
+                img.src = `${item.url}`; // ?
 
+                divWrapper = document.createElement('div');
+                divWrapper.classlist.add('info-wrapper');
 
-        thirdBlock.innerHTML = resultHTML;
+                divName = document.createElement('div');
+                divNAme.classList.add('text-muted');
+                texName = document.createTextNode(`${item.name}`);
+
+                divDescript = document.createElement('div');
+                divDescript.classList.add('text-muted', 'top-padding');
+                textDescript = document.createTextNode(`${item.description}`);
+
+                divDate = document.createElement('div');
+                divDate.classList.add('text-muted');
+                textDate = document.createTextNode(`${item.date}`);
+
+                // добавялем как дочерний елемент const element = document.querySelector('#third-line'); 
+                //ДОБАВЛЯЕТСЯ ДОЧЕРНИЙ В КОНЕЦ РОДИТЕЛЬСКОГО 
+                divCol.appendChild(divCol);
+                img.appendChild(img);
+
+                divWrapper.appendChild(divWrapper);
+
+                divName.appendChild(divName);
+                textName.appendChild(textName);
+
+                divDescript.appendChild(divDescript);
+                textDescript.appendChild(textDescript);
+
+                divDate.appendChild(divDate);
+                textDate.appendChild(textDate);
+        })
+        thirdBlock.innerHTML = resultElement;
     }
 
     function init() {
-        selectBox();
-        buildingGallery();
-        // сначала снимаете значение с селектбокса, 
-        // document.getElementById("").value
-
-        // определяете какой способ построения галлереи надо использовать
+        // сначала снимаете значение с селектбокса
+        selectBox(); // document.getElementById("").value
+        buildingGallery(); // определяете какой способ построения галлереи надо использовать
         // запускаете необходимую логику
-
-        // код ниже дан для справки, вам нужно будет использовать тот вариан который вы выбрали в селектбоксе
-        // пример построения галлереи с помощю replace
-        function getGalleryByReplace() {
-
-        }
-
-
-        let resultHTML = replaceItemTemplate
-            .replace(/\$name/gi, item.name)
-            .replace("$url", item.url)
-            .replace("$description", item.description)
-            .replace("$date", item.date);
-
-        firstBlock.innerHTML = resultHTML;
-
-        // один из примеров как прятать блоки
-        document.querySelector('.first-group').classList.add("show");
-        document.querySelector('.second-group').classList.add("show");
-        document.querySelector('.third-group').classList.add("hide");
-
     }
-
     btn.addEventListener("click", init);
-
 })()
