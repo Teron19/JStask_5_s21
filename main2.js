@@ -49,7 +49,7 @@
                 description: transformDescript(el.description),
                 date: transformDate(el.date)
             })
-             return newDate;
+            return newDate;
         )}
     
         function transformURL(url){
