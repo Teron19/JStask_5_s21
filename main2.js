@@ -2,11 +2,19 @@
 (() => {
     'use strict'
 
-    const btn = document.getElementById("play"),
-        firstBlock = document.querySelector('#first-line'),
-        secondBlock = document.querySelector('#second-line'),
-        boxSelect = '',
-        buildGallery = '';
+    const btn = document.getElementById("play");
+    
+    const typeMethod = document.getElementById("type-selector"), //выбранний метод
+          amountImage = document.getElementById("line-selector"); //количество картинок    
+    
+    const firstBlock = document.querySelector('#first-line'),
+          secondBlock = document.querySelector('#second-line'),
+          thirdBlock = document.querySelector('#third-line'),
+       
+    const boxSelect = document.querySelector('first-groupe'),
+          buildGallery =  document.querySelector('second-group'),
+          createElementGallery =  document.querySelector('third-group');
+
         
     function selectBox() {
 
