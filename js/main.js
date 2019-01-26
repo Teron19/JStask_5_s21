@@ -57,7 +57,7 @@
 
     function transformDescription(elemDescript) {
         return (elemDescript.lenght > 15) ?
-            `${elemDescript.substt(0, 15)}...` :
+            `${elemDescript.substr(0, 15)}...` :
             `${elemDescript}`;
     }
 
