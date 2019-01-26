@@ -16,6 +16,9 @@
           thirdGroupe =  document.querySelector('#third-group');
     
     function run() {
+        const preparedData = fetchData();
+        const slicedData = sliceData(preparedData);
+
         switch (typeMethod.value) {
             case '1':
                 firstGroupe.classList.add('show');
@@ -38,10 +41,22 @@
         }
     }
 
-    const preparedData = fetchData();
-    let newDate = [];
+        function sliceData(preparedData) {
+            switch (amountImage.value) {
+                case '0':
+                    return preparedData.slice(0);
+                case '1':
+                    return preparedData.slice(0, 3);
+                case '3':
+                    return preparedData.slice(3, 6);
+                default: 
+                    alert('Выбирете количество картинок');
+            }
+            return preparedData.slice();
+        }
 
     function fetchData() {
+        let newDate = [];
         data.forEach(el =>{
             newDate.push({
                 url: transformURL(el.url),
