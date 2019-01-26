@@ -2,17 +2,18 @@
 (() => {
     'use strict'
 
-    let btn = document.getElementById("play"),
+    const btn = document.getElementById("play"),
         firstBlock = document.querySelector('#first-line'),
         secondBlock = document.querySelector('#second-line'),
-        thirdBlock = document.querySelector('#third-line');
-
+        boxSelect = '',
+        buildGallery = '';
+        
     function selectBox() {
 
     }
 
     function buildingGallery() {
-        
+
     }
 
     function init() {
