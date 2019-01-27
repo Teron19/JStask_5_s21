@@ -7,7 +7,7 @@
     const typeMethod = document.getElementById("type-selector"), //выбранний метод selectBox
           amountImage = document.getElementById("line-selector"); //количество картинок    
     
-    const firstBlock = document.querySelector('#first-line'),
+    const firstBlock = document.querySelector('#first-line'), // для вывода информации в данный блок
           secondBlock = document.querySelector('#second-line'),
           thirdBlock = document.querySelector('#third-line');
        
@@ -44,15 +44,17 @@
         function sliceData(preparedData) {
             switch (amountImage.value) {
                 case '0':
+                    getGalleryByReplace();
                     return preparedData.slice(0);
                 case '1':
-                    return preparedData.slice(0, 3);
-                case '3':
-                    return preparedData.slice(3, 6);
+                getGalleryByString();
+                    return preparedData.slice(0, 4);
+                case '2':
+                    galleryByCreateElement();
+                    return preparedData.slice(0, 7);
                 default: 
                     alert('Выбирете количество картинок');
             }
-            return preparedData.slice();
         }
 
     function fetchData() {
@@ -65,7 +67,7 @@
                 date: transformDate(el.date)
             })
             return newDate;
-        )}
+        })
     
         function transformURL(url){
             return(url.substr(0, 6) == 'http://')
@@ -86,6 +88,45 @@
         function transformDate(milliseconds) {
             return moment(milliseconds).format('YYYY/MM/DD HH:mm');
         }
+    }
+
+    function getGalleryByReplace() {
+        let resultHTML = ''; // для накопления результата 
+        const replaceItemTemplate = '<div class="col-sm-3 col-xs-6">\
+    <img src="$url" alt="$name" class="img-thumbnail">\
+    <div class="info-wrapper">\
+        <div class="text-muted">$name</div>\
+        <div class="text-muted top-padding">$description</div>\
+        <div class="text-muted">$date</div>\
+    </div>\
+    </div>';
+        preparedData.forEach(item => {
+            resultHTML += replaceItemTemplate // += прошлись по масиву даннх и записали результат в resultHTML и так каждій раз. В resultHTML накапливаем результт
+                .replace(item.name, /\$name/gi)
+                .replace(item.url, "$url")
+                .replace(item.description ,"$description" )
+                .replace(item.date, "$date");
+        })
+        firstBlock.innerHTML = resultHTML; //вывод результата
+    }
+
+    function getGalleryByString() {
+        secondItemTemplate = '';
+        preparedData.forEach(item => {
+            secondItemTemplate += `<div class="col-sm-3 col-xs-6">
+            <img src="${item.url}" alt="${item.name}" class="img-thumbnail">
+            <div class="info-wrapper">
+                <div class="text-muted">${item.name}</div>
+                <div class="text-muted top-padding">${item.description}</div>
+                <div class="text-muted">${item.date}</div>
+            </div>
+            </div>`;
+        })
+        secondBlock.innerHTML = secondItemTemplate;
+    }
+
+    function galleryByCreateElement() {
+
     }
 
 
