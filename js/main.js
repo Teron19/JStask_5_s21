@@ -144,7 +144,7 @@
     function galleryByCreateElement() {
         //const element = document.querySelector('#third-line');
         let resultElement = newDate.forEach(item => {
-            let = divCol = document.createElement('div');
+            let  divCol = document.createElement('div');
                 img = document.createElement('img');
                 img.classlist.add('img-thumbnail')
                 img.src = `${item.url}`; // ?

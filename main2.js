@@ -126,7 +126,62 @@
     }
 
     function galleryByCreateElement() {
-
+           // пример построения галлереи с помощю шаблонных строк.
+           let secondItemTemplate = ''; // создаем для накапливания результата. 
+           newDate.forEach(item => { // проходимся методом forEach до конца массива обектов newDate и на каждой итерации добавляем результат в переменную secondItemTemplate.
+               secondItemTemplate += `<div class="col-sm-3 col-xs-6">
+                  <img src="${item.url}" alt="${item.name}" class="img-thumbnail">
+                  <div class="info-wrapper">
+                      <div class="text-muted">${item.name}</div>
+                      <div class="text-muted top-padding">${item.description}</div>
+                      <div class="text-muted">${item.date}</div>
+                  </div>
+                  </div>`;
+           })
+           secondBlock.innerHTML = secondItemTemplate; //выводим ныкопленные с secondItemTemplate данные в secondBlock = document.querySelector('#second-line'),
+       }
+   
+       function galleryByCreateElement() {
+           //const element = document.querySelector('#third-line');
+           let resultElement = newDate.forEach(item => {
+               let  divCol = document.createElement('div');
+                   img = document.createElement('img');
+                   img.classlist.add('img-thumbnail')
+                   img.src = `${item.url}`; // ?
+   
+                   divWrapper = document.createElement('div');
+                   divWrapper.classlist.add('info-wrapper');
+   
+                   divName = document.createElement('div');
+                   divNAme.classList.add('text-muted');
+                   texName = document.createTextNode(`${item.name}`);
+   
+                   divDescript = document.createElement('div');
+                   divDescript.classList.add('text-muted', 'top-padding');
+                   textDescript = document.createTextNode(`${item.description}`);
+   
+                   divDate = document.createElement('div');
+                   divDate.classList.add('text-muted');
+                   textDate = document.createTextNode(`${item.date}`);
+   
+                   // добавялем как дочерний елемент const element = document.querySelector('#third-line'); 
+                   //ДОБАВЛЯЕТСЯ ДОЧЕРНИЙ В КОНЕЦ РОДИТЕЛЬСКОГО 
+                   divCol.appendChild(divCol);
+                   img.appendChild(img);
+   
+                   divWrapper.appendChild(divWrapper);
+   
+                   divName.appendChild(divName);
+                   textName.appendChild(textName);
+   
+                   divDescript.appendChild(divDescript);
+                   textDescript.appendChild(textDescript);
+   
+                   divDate.appendChild(divDate);
+                   textDate.appendChild(textDate);
+           })
+           thirdBlock.innerHTML = resultElement;
+       }
     }
 
 
