@@ -143,26 +143,27 @@
    
        function galleryByCreateElement() {
            //const element = document.querySelector('#third-line');
-           let resultElement = newDate.forEach(item => {
-               let  divCol = document.createElement('div');
+            let resultElement = '';
+                resultElement += newDate.forEach(item => {
+              let  divCol = document.createElement('div'),
                    img = document.createElement('img');
-                   img.classlist.add('img-thumbnail')
+                   img.classlist.add('img-thumbnail');
                    img.src = `${item.url}`; // ?
    
-                   divWrapper = document.createElement('div');
+                   let divWrapper = document.createElement('div');
                    divWrapper.classlist.add('info-wrapper');
    
-                   divName = document.createElement('div');
+                   let divName = document.createElement('div');
                    divNAme.classList.add('text-muted');
-                   texName = document.createTextNode(`${item.name}`);
+                   let texName = document.createTextNode(`${item.name}`);
    
-                   divDescript = document.createElement('div');
+                   let divDescript = document.createElement('div');
                    divDescript.classList.add('text-muted', 'top-padding');
-                   textDescript = document.createTextNode(`${item.description}`);
+                   let textDescript = document.createTextNode(`${item.description}`);
    
-                   divDate = document.createElement('div');
+                   let divDate = document.createElement('div');
                    divDate.classList.add('text-muted');
-                   textDate = document.createTextNode(`${item.date}`);
+                   let textDate = document.createTextNode(`${item.date}`);
    
                    // добавялем как дочерний елемент const element = document.querySelector('#third-line'); 
                    //ДОБАВЛЯЕТСЯ ДОЧЕРНИЙ В КОНЕЦ РОДИТЕЛЬСКОГО 

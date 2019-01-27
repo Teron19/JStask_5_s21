@@ -143,8 +143,11 @@
 
     function galleryByCreateElement() {
         //const element = document.querySelector('#third-line');
-        let resultElement = newDate.forEach(item => {
-            let  divCol = document.createElement('div');
+        let resultElement = '';
+            resultElement += newDate.forEach(item => {
+            let divCol = document.createElement('div');
+                divCol.classList.add('col-sm-3 col-xs-6');
+
                 img = document.createElement('img');
                 img.classlist.add('img-thumbnail')
                 img.src = `${item.url}`; // ?
@@ -189,5 +192,5 @@
         buildingGallery(); // определяете какой способ построения галлереи надо использовать
         // запускаете необходимую логику
     }
-    btn.addEventListener("click", init);
+    btn.addEventListener("click", init());
 })()
