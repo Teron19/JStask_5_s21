@@ -133,13 +133,18 @@
   }
 
   function renderByCreateElement(date) {
-    let resultElement = '';
-    resultElement += date.forEach(item => {
-      let  divCol = document.createElement('div'),
-      img = document.createElement('img');
+    
+    let resultElement = date.forEach(item => {
+      let  divCol = document.createElement('div');
+      divCol.classList.add('col-sm-3', 'col-xs-6');
+      
+      let img = document.createElement('img');
       img.classList.add('img-thumbnail');
+      img.setAttribute('src', formatUrl(item.url));
+      img.setAttribute('alt', formatName(item.name));
+      
       //img.setAttribute(`${item.url}`);  // ?
-      img.src = `${item.url}`;  // ?
+      //img.src = `${item.url}`;  // ?
 
       let divWrapper = document.createElement('div');
       divWrapper.classList.add('info-wrapper');
@@ -178,6 +183,7 @@
       //textDate.appendChild(textDate);
     })
     thirdBlock.innerHTML = resultElement;
+    //return renderByCreateElement();
   }
 
   btn.addEventListener("click", run);
