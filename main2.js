@@ -111,7 +111,7 @@
       
       let img = document.createElement('img');
       //img.setAttribute('src', formatUrl(item.url));
-            //img.src(`${item.url}`);
+              //img.src(`${item.url}`);
       //img.setAttribute('alt', formatName(item.name));
             //img.alt(`${item.name}`);
       img.classList.add('img-thumbnail');
