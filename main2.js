@@ -15,42 +15,6 @@
     secondGroupe = document.querySelector('#second-group'),
     thirdGroupe = document.querySelector('#third-group');
 
-  function run() {
-    const preparedData = fetchData();
-    const slicedData = sliceData(preparedData);
-
-    switch (typeMethod.value) {
-      case '1':
-        // в slicedData находится необходимое количество элементов для отображения
-        // строим галерею методом replace
-        
-        renderGalleryByReplace(slicedData);
-
-        // показываем блок с этой галереей  
-        firstGroupe.classList.remove('hide');
-        secondGroupe.classList.add('hide');
-        thirdGroupe.classList.add('hide');
-        break;
-      case '2':
-        renderGalleryByString(slicedData);
-
-        secondGroupe.classList.remove('hide');
-        thirdGroupe.classList.add('hide');
-        firstGroupe.classList.add('hide');
-        break;
-      case '3':
-        renderByCreateElement(slicedData);
-
-        thirdGroupe.classList.remove('hide');
-        secondGroupe.classList.add('hide');
-        firstGroupe.classList.add('hide');
-        break;
-      default:
-        alert('Выберите вариант');
-        break;
-    }
-  }
-
   function sliceData(preparedData) {
     switch (amountImage.value) {
       case '0':
@@ -133,15 +97,24 @@
   }
 
   function renderByCreateElement(date) {
-    
-    let resultElement = date.forEach(item => {
+    /*let dataCopy = data.slice();
+    if(count == '1') {
+      dataCopy = dataCopy.splice(0, 3)
+    } else if (count == '2') {
+      dataCopy = dataCopy.splice(0,)
+    }
+    */
+
+      date.forEach(item => {
       let  divCol = document.createElement('div');
       divCol.classList.add('col-sm-3', 'col-xs-6');
       
       let img = document.createElement('img');
+      //img.setAttribute('src', formatUrl(item.url));
+            //img.src(`${item.url}`);
+      //img.setAttribute('alt', formatName(item.name));
+            //img.alt(`${item.name}`);
       img.classList.add('img-thumbnail');
-      img.setAttribute('src', formatUrl(item.url));
-      img.setAttribute('alt', formatName(item.name));
       
       //img.setAttribute(`${item.url}`);  // ?
       //img.src = `${item.url}`;  // ?
@@ -149,41 +122,91 @@
       let divWrapper = document.createElement('div');
       divWrapper.classList.add('info-wrapper');
 
-      let divName = document.createElement('div');
-      divName.classList.add('text-muted');
-      let textName = document.createTextNode(`${item.name}`);
+          let divName = document.createElement('div');
+          divName.classList.add('text-muted');
 
-      let divDescript = document.createElement('div');
-      divDescript.classList.add('text-muted', 'top-padding');
-      let textDescript = document.createTextNode(`${item.description}`);
-
-      let divDate = document.createElement('div');
-      divDate.classList.add('text-muted');
-      let textDate = document.createTextNode(`${item.date}`);
+          let divDescript = document.createElement('div');
+          divDescript.classList.add('text-muted', 'top-padding');
+      
+          let divDate = document.createElement('div');
+          divDate.classList.add('text-muted');
+      
+          let textName = document.createTextNode(`${item.name}`);
+          let textDescript = document.createTextNode(`${item.description}`);
+          let textDate = document.createTextNode(`${item.date}`);
 
       // добавялем как дочерний елемент const element = document.querySelector('#third-line'); 
       //ДОБАВЛЯЕТСЯ ДОЧЕРНИЙ В КОНЕЦ РОДИТЕЛЬСКОГО 
-      divCol.appendChild(img);
-      //img.appendChild(img);
-
-      divCol.appendChild(divWrapper);
+      divName.appendChild(textName);
+      divDescript.appendChild(textDescript);
+      divDate.appendChild(textDate);
 
       divWrapper.appendChild(divName);
-      divName.appendChild(textName);
-      //textName.appendChild(textName);
-
       divWrapper.appendChild(divDescript);
-      divDescript.appendChild(textDescript);
-
-      //textDescript.appendChild(textDescript);
-
       divWrapper.appendChild(divDate);
-      divDate.appendChild(textDate);
+
+      divCol.appendChild(img);
+      divCol.appendChild(divWrapper);
+
+      thirdBlock.appendChild(divCol);
+
+
+
+      /*'<div class="col-sm-3 col-xs-6">\
+      <img src="$url" alt="$name" class="img-thumbnail">\
+      <div class="info-wrapper">\
+          <div class="text-muted">$name</div>\
+          <div class="text-muted top-padding">$description</div>\
+          <div class="text-muted">$date</div>\
+      </div>\
+      </div>';
+      */
       
-      //textDate.appendChild(textDate);
     })
-    thirdBlock.innerHTML = resultElement;
-    //return renderByCreateElement();
+    //thirdBlock.innerHTML = resultElement;
+  }
+ 
+   function clearGallery() {
+    firstBlock.innerHTML = '';
+    secondBlock.innerHTML = '';
+    thirdBlock.innerHTML = '';   
+  }  
+
+  function run() {
+    clearGallery();  
+    const preparedData = fetchData();
+    const slicedData = sliceData(preparedData);
+
+    switch (typeMethod.value) {
+      case '1':
+        // в slicedData находится необходимое количество элементов для отображения
+        // строим галерею методом replace
+        
+        renderGalleryByReplace(slicedData);
+
+        // показываем блок с этой галереей  
+        firstGroupe.classList.remove('hide');
+        secondGroupe.classList.add('hide');
+        thirdGroupe.classList.add('hide');
+        break;
+      case '2':
+        renderGalleryByString(slicedData);
+
+        secondGroupe.classList.remove('hide');
+        thirdGroupe.classList.add('hide');
+        firstGroupe.classList.add('hide');
+        break;
+      case '3':
+        renderByCreateElement(slicedData);
+
+        thirdGroupe.classList.remove('hide');
+        secondGroupe.classList.add('hide');
+        firstGroupe.classList.add('hide');
+        break;
+      default:
+        alert('Выберите вариант');
+        break;
+    }
   }
 
   btn.addEventListener("click", run);
