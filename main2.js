@@ -15,50 +15,6 @@
     secondGroupe = document.querySelector('#second-group'),
     thirdGroupe = document.querySelector('#third-group');
 
-  function sliceData(preparedData) {
-    switch (amountImage.value) {
-      case '0':
-        return preparedData.slice(0);
-      case '1':
-        return preparedData.slice(0, 3);
-      case '2':
-        return preparedData.slice(0, 6);
-    }
-  }
-
-  function fetchData() {
-    let newData = [];
-    data.forEach(el => {
-      newData.push({
-        url: transformURL(el.url),
-        name: transformName(el.name),
-        description: transformDescript(el.description),
-        date: transformDate(el.date)
-      })
-    })
-    return newData;
-
-    function transformURL(url) {
-      return (url.substr(0, 6) == 'http://') ?
-        url :
-        'http://' + url;
-    }
-
-    function transformName(name) {
-      return name.slice(0, 1).toUpperCase() + name.slice(1).toLowerCase();
-    }
-
-    function transformDescript(text) {
-      return (text.length > 15) 
-      ? text.substr(0, 15) + '...' 
-      : text;
-    }
-
-    function transformDate(milliseconds) {
-      return moment(milliseconds).format('YYYY/MM/DD HH:mm');
-    }
-  }
-
   function renderGalleryByReplace(date) {
     let resultHTML = ''; // для накопления результата 
     const replaceItemTemplate = '<div class="col-sm-3 col-xs-6">\
@@ -110,14 +66,10 @@
       divCol.classList.add('col-sm-3', 'col-xs-6');
       
       let img = document.createElement('img');
-      //img.setAttribute('src', formatUrl(item.url));
-              //img.src(`${item.url}`);
-      //img.setAttribute('alt', formatName(item.name));
-            //img.alt(`${item.name}`);
+      img.setAttribute('src', (item.url));   
+      img.setAttribute('alt', (item.name));
       img.classList.add('img-thumbnail');
       
-      //img.setAttribute(`${item.url}`);  // ?
-      //img.src = `${item.url}`;  // ?
 
       let divWrapper = document.createElement('div');
       divWrapper.classList.add('info-wrapper');
@@ -149,27 +101,57 @@
       divCol.appendChild(divWrapper);
 
       thirdBlock.appendChild(divCol);
-
-
-
-      /*'<div class="col-sm-3 col-xs-6">\
-      <img src="$url" alt="$name" class="img-thumbnail">\
-      <div class="info-wrapper">\
-          <div class="text-muted">$name</div>\
-          <div class="text-muted top-padding">$description</div>\
-          <div class="text-muted">$date</div>\
-      </div>\
-      </div>';
-      */
-      
     })
-    //thirdBlock.innerHTML = resultElement;
+  }
+
+  function sliceData(preparedData) {
+    switch (amountImage.value) {
+      case '0':
+        return preparedData.slice(0);
+      case '1':
+        return preparedData.slice(0, 3);
+      case '2':
+        return preparedData.slice(0, 6);
+    }
   }
  
+  function fetchData() {
+    let newData = [];
+    data.forEach(el => {
+      newData.push({
+        url: transformURL(el.url),
+        name: transformName(el.name),
+        description: transformDescript(el.description),
+        date: transformDate(el.date)
+      })
+    })
+    return newData;
+
+    function transformURL(url) {
+      return (url.substr(0, 6) == 'http://') ?
+        url :
+        'http://' + url;
+    }
+
+    function transformName(name) {
+      return name.slice(0, 1).toUpperCase() + name.slice(1).toLowerCase();
+    }
+
+    function transformDescript(text) {
+      return (text.length > 15) 
+      ? text.substr(0, 15) + '...' 
+      : text;
+    }
+
+    function transformDate(milliseconds) {
+      return moment(milliseconds).format('YYYY/MM/DD HH:mm');
+    }
+  }
+
    function clearGallery() {
-    firstBlock.innerHTML = '';
-    secondBlock.innerHTML = '';
-    thirdBlock.innerHTML = '';   
+    firstBlock.innerHTML = ''; // єту очистку можно и не писать бо мі каждый раз перезаписываем результат в resultHTML
+    secondBlock.innerHTML = '';  // єту очистку можно и не писать бо мі каждый раз перезаписываем результат в secondItemTemplate
+    thirdBlock.innerHTML = '';   // а тут мы записываем  thirdBlock.appendChild(divCol); потому нужно каждый раз очищять результат чтоб небыло накопления старых результатов 
   }  
 
   function run() {
